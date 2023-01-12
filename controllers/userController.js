@@ -48,7 +48,7 @@ updateUser(req, res) {
           ? res.status(404).json({ message: 'No users with that ID' })
           : Thought.deleteMany({ _id: { $in: users.thoughts } })
       )
-      .then(() => res.json({ message: 'Course and students deleted!' }))
+      .then(() => res.json({ message: 'User deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
 
