@@ -1,5 +1,5 @@
-const { Schema, Types } = require('mongoose');
-
+const { Schema, Types } = require("mongoose");
+const dateFormat = require('../utils/date')
 const assignmentSchema = new Schema(
   {
     reactionId: {
@@ -11,17 +11,16 @@ const assignmentSchema = new Schema(
       required: true,
       maxlength: 280,
       minlength: 1,
-      
     },
     createdAt: {
       type: Date,
       default: Date.now,
+      get: (timeStamp) => dateFormat(timeStamp),
     },
     username: {
-        type: String,
-        required: true,
-        max_length: 50,
-      },
+      type: String,
+      required: true,
+    },
   },
   {
     toJSON: {
