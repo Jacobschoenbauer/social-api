@@ -1,6 +1,6 @@
 const { Schema, Types } = require("mongoose");
-const dateFormat = require('../utils/date')
-const assignmentSchema = new Schema(
+const dateFormat = require("../utils/date");
+const reactionSchema = new Schema(
   {
     reactionId: {
       type: Schema.Types.ObjectId,
@@ -30,4 +30,6 @@ const assignmentSchema = new Schema(
   }
 );
 
-module.exports = assignmentSchema;
+
+
+module.exports = reactionSchema;
