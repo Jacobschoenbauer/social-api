@@ -1,6 +1,6 @@
-const { Schema, Types } = require('mongoose');
-const reactionSchema = require('./Reaction')
-const dateFormat = require('../utils/date')
+const { Schema, Types } = require("mongoose");
+const reactionSchema = require("./Reaction");
+const dateFormat = require("../utils/date");
 const thoughtSchema = new Schema(
   {
     thoughtText: {
@@ -8,20 +8,19 @@ const thoughtSchema = new Schema(
       required: true,
       maxlength: 280,
       minlength: 1,
-      default: 'Unnamed thought',
+      default: "Unnamed thought",
     },
     createdAt: {
       type: Date,
       default: Date.now,
-      get:timeStamp => dateFormat(timeStamp),
+      get: (timeStamp) => dateFormat(timeStamp),
     },
     username: {
-      type: String ,
+      type: String,
       required: true,
-      
     },
 
-    reactions:[reactionSchema]
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
@@ -31,6 +30,6 @@ const thoughtSchema = new Schema(
   }
 );
 
-
+thoughtSchema
 
 module.exports = thoughtSchema;
