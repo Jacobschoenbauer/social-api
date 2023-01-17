@@ -1,9 +1,10 @@
-const {Thought, Reaction } = require('../models');
+
+const {Thought, User } = require('../models');
 
 module.exports = {
   // Get all thoughts
   getThoughts(req, res) {
-    Thought.find()
+    Thought.find({})
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
@@ -11,17 +12,17 @@ module.exports = {
     Thought.findOne({ _id: req.params.thoughtId })
       .select('-__v')
       .populate('reactions')
-      .populate('thoughts')
+      .populate('users')
       .then((user) =>
         !user
-          ? res.status(404).json({ message: 'No thought with that ID' })
+          ? res.status(404).json({ message: 'No thoughts with that ID' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
 
   },
   createThought(req, res) {
-    Thought.create(req.body)
+    User.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => {
         console.log(err);
@@ -48,7 +49,7 @@ updateThought(req, res) {
           ? res.status(404).json({ message: 'No thoughts with that ID' })
           : Thought.deleteMany({ _id: { $in: thoughts.thoughts } })
       )
-      .then(() => res.json({ message: 'thought deleted!' }))
+      .then(() => res.json({ message: 'thoughts deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
   updateReaction(req, res) {
@@ -57,10 +58,10 @@ updateThought(req, res) {
       { $addToSet: { reactions: req.body } },
       { runValidators: true, new: true }
     )
-      .then((thought) =>
-        !thought
-          ? res.status(404).json({ message: "No thought frind with ID!" })
-          : res.json(thought)
+      .then((thoughts) =>
+        !thoughts
+          ? res.status(404).json({ message: "No thoughts frind with ID!" })
+          : res.json(thoughts)
       )
       .catch((err) => res.status(500).json(err));
   },
@@ -71,11 +72,12 @@ updateThought(req, res) {
       { $pull: { reactions: { reactionId: req.params.reactionId } } },
       { runValidators: true, new: true }
     )
-      .then((thought) =>
-        !thought
-          ? res.status(404).json({ message: "No thought find with this ID!" })
-          : res.json(thought)
+      .then((thoughts) =>
+        !thoughts
+          ? res.status(404).json({ message: "No thoughts find with this ID!" })
+          : res.json(thoughts)
       )
       .catch((err) => res.status(500).json(err));
   },
 };
+
