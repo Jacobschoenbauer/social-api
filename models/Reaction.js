@@ -30,6 +30,6 @@ const reactionSchema = new Schema(
   }
 );
 
- reactionSchema
+ 
 
 module.exports = reactionSchema;

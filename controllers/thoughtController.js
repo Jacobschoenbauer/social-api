@@ -22,7 +22,7 @@ module.exports = {
 
   },
   createThought(req, res) {
-    User.create(req.body)
+    Thought.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => {
         console.log(err);
