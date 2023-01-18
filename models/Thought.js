@@ -13,7 +13,9 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (timeStamp) => dateFormat(timeStamp),
+      get: function (Date) {
+        return Date;
+      },
     },
     username: {
       type: String,
@@ -30,6 +32,6 @@ const thoughtSchema = new Schema(
   }
 );
 
-const Thought = model('Thought', thoughtSchema);
+const Thought = model("Thought", thoughtSchema);
 
 module.exports = Thought;
