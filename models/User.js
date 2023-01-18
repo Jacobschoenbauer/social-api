@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-
+//sets up model for user
 const userSchema = new Schema(
     {
       username: {
@@ -9,6 +9,7 @@ const userSchema = new Schema(
         trim: true,
         unique: true,
       },
+      //has the match so only a email can be entered there
       email: {
         type: String,
         required: true,

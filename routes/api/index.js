@@ -1,3 +1,5 @@
+
+//connects the api routes to the rest of the backend
 const router = require("express").Router();
 
 const thoughtsRoutes = require("./thoughtsRoutes");

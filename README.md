@@ -15,5 +15,7 @@ Install npm, Express.js, Mongoose
 https://github.com/Jacobschoenbauer/social-api
 
 ## Picture  
-
+![img](images/social%20api.png)
 ## Video  
+
+https://www.youtube.com/watch?v=svgKk-W_HYM

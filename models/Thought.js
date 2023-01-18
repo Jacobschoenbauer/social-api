@@ -1,3 +1,5 @@
+
+//sets up model for thoughts
 const { Schema, model, Types } = require("mongoose");
 const reactionSchema = require("./Reaction");
 const dateFormat = require("../utils/date");
@@ -10,6 +12,7 @@ const thoughtSchema = new Schema(
       minlength: 1,
       default: "Unnamed thought",
     },
+    //sets the date this thought was created
     createdAt: {
       type: Date,
       default: Date.now,

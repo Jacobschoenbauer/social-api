@@ -1,3 +1,5 @@
+
+//sets up model for reactions to be added to thoughts
 const { Schema, Types } = require("mongoose");
 const dateFormat = require("../utils/date");
 const reactionSchema = new Schema(

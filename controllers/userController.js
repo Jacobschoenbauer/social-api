@@ -1,7 +1,7 @@
 const { User, Thought } = require("../models");
 
 module.exports = {
-  // Get all users
+  // Get all users and controllers for all other routes
   getUsers(req, res) {
     User.find()
       .then((users) => res.json(users))
