@@ -1,5 +1,4 @@
-
-const {Thought, User } = require('../models');
+const { Thought, User } = require("../models");
 
 module.exports = {
   // Get all thoughts
@@ -10,16 +9,16 @@ module.exports = {
   },
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
-      .select('-__v')
-      .populate('reactions')
-      .populate('users')
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: 'No thoughts with that ID' })
-          : res.json(user)
-      )
-      .catch((err) => res.status(500).json(err));
-
+       .then((thoughtData) => res.json(thoughtData))
+      // .select("-__v")
+      // .populate("reactions")
+      // .populate("users")
+      // .then((user) =>
+      //   !user
+      //     ? res.status(404).json({ message: "No thoughts with that ID" })
+      //     : res.json(user)
+      // )
+       .catch((err) => res.status(500).json(err));
   },
   createThought(req, res) {
     Thought.create(req.body)
@@ -28,8 +27,8 @@ module.exports = {
         console.log(err);
         return res.status(500).json(err);
       });
-},
-updateThought(req, res) {
+  },
+  updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $set: req.body },
@@ -37,7 +36,7 @@ updateThought(req, res) {
     )
       .then((thoughts) =>
         !thoughts
-          ? res.status(404).json({ message: 'No thoughts with this id!' })
+          ? res.status(404).json({ message: "No thoughts with this id!" })
           : res.json(thoughts)
       )
       .catch((err) => res.status(500).json(err));
@@ -46,10 +45,10 @@ updateThought(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
       .then((thoughts) =>
         !thoughts
-          ? res.status(404).json({ message: 'No thoughts with that ID' })
+          ? res.status(404).json({ message: "No thoughts with that ID" })
           : Thought.deleteMany({ _id: { $in: thoughts.thoughts } })
       )
-      .then(() => res.json({ message: 'thoughts deleted!' }))
+      .then(() => res.json({ message: "thoughts deleted!" }))
       .catch((err) => res.status(500).json(err));
   },
   updateReaction(req, res) {
@@ -65,7 +64,7 @@ updateThought(req, res) {
       )
       .catch((err) => res.status(500).json(err));
   },
-  
+
   deleteReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -80,4 +79,3 @@ updateThought(req, res) {
       .catch((err) => res.status(500).json(err));
   },
 };
-
